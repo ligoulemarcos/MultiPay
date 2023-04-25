@@ -1,7 +1,21 @@
-library multipay;
+import 'dart:async';
 
-/// A Calculator.
-class MultiPay {
-  /// Returns [value] plus 1.
-  int addOne(int value) => value + 1;
+import 'package:flutter/services.dart';
+import 'package:multipay/src/mercado_pago_manager.dart';
+
+export 'package:multipay/src/mercado_pago_manager.dart';
+
+class MultiPay{
+  static const MethodChannel _channel = MethodChannel("Multipay");
+  static final MercadoPagoManager _mercadoPago = MercadoPagoManager();
+
+  static MercadoPagoManager get mercadoPago => _mercadoPago;
+
+  ///Dummy method to test the PlatformChannel
+  ///You can use this to add the platform used in checkout
+  static Future<String?> get platformVersion async {
+    final String? version = await _channel.invokeMethod("getPlatformVersion");
+
+    return version;
+  }
 }
