@@ -59,6 +59,9 @@ public class MultiPayPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Ac
 
                 Log.d("MultiPayPlugin", "Mercadopago: Starting checkout for $preferenceId")
                 startCheckout(publicKey, preferenceId, result)
+            } else if (call.method == "viumiCheckout") {
+                val args = call.arguments as HashMap<*, *>
+
             } else {
                 result.error("1", "Another operation in progress", null)
             }
@@ -81,7 +84,7 @@ public class MultiPayPlugin: FlutterPlugin, MethodCallHandler, ActivityAware, Ac
     }
 
     override fun onDetachedFromActivity(){
-        Log.d("MultiPayPlugin", "Mercadopago: onDetachedFromActivity")
+        Log.d("MultiPayPlugin", "onDetachedFromActivity")
         activity = null
     }
 
