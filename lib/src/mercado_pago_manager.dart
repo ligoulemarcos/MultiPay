@@ -12,7 +12,7 @@ class MercadoPagoManager {
 
   MercadoPagoManager._();
 
-  static const MethodChannel _channel = MethodChannel("Multipay");
+  static const MethodChannel _channel = MethodChannel("multipay");
 
   ///Starts the checkout.
   ///

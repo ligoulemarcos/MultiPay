@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:multipay/src/mercado_pago_manager.dart';
 
 export 'package:multipay/src/mercado_pago_manager.dart';
+export 'package:multipay/src/payment_result.dart';
 
 class MultiPay{
   static const MethodChannel _channel = MethodChannel("Multipay");

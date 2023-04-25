@@ -30,7 +30,7 @@ flutter:
   plugin:
     platforms:
       android:
-        package: ar.com.siltium.MultiPayPlugin
+        package: ar.com.siltium.multipay
         pluginClass: MultiPayPlugin
       ios:
         pluginClass: MultiPayPlugin
