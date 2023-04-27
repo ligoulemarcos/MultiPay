@@ -1,4 +1,4 @@
-import 'package:multipay/src/macro_click_de_pago/macro_access_token.dart';
+import 'package:multipay/src/models/macro/macro_access_token.dart';
 
 class MacroClientCredentialsModel {
   String? guid;

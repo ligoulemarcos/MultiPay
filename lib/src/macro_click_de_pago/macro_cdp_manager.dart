@@ -1,9 +1,9 @@
 import 'dart:convert';
 
 import "package:http/http.dart" as http;
-import 'package:multipay/src/macro_click_de_pago/macro_access_token.dart';
 
-import 'macro_client_credentials.dart';
+import '../models/macro/macro_access_token.dart';
+import '../models/macro/macro_client_credentials.dart';
 
 class MacroCDPManager {
   static final MacroCDPManager _instance = MacroCDPManager._();
@@ -17,8 +17,7 @@ class MacroCDPManager {
 
   setSandboxEnvironment(bool set) => sandboxEnvironment = set;
 
-  Future<bool> checkAvailability(
-  ) async {
+  Future<bool> checkAvailability() async {
     var response = await http.get(
       Uri.https(
         _getBaseURL(),
@@ -65,8 +64,8 @@ class MacroCDPManager {
       return null;
     }
 
-    var response = await http
-        .post(Uri.https(_getBaseURL(), "tokens"), headers: {
+    var response =
+        await http.post(Uri.https(_getBaseURL(), "tokens"), headers: {
       "Authorization": "Bearer ${client.token!.accessToken!}",
       "Content-Type": "application/json",
     }, body: {

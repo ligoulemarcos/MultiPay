@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:multipay/src/mercadopago/mercado_pago_manager.dart';
 import 'package:multipay/src/mercadopago/payment_result.dart';
 import 'package:multipay/src/viumi/viumi_checkout.dart';
-import 'package:multipay/src/viumi/viumi_client_credentials_model.dart';
+import 'package:multipay/src/models/viumi/viumi_client_credentials_model.dart';
 
 export 'package:multipay/src/mercadopago/payment_result.dart';
 

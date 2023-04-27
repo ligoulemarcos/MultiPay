@@ -1,7 +1,7 @@
 import "dart:convert";
 import "package:http/http.dart" as http;
-import 'package:multipay/src/viumi/viumi_access_token_model.dart';
-import 'package:multipay/src/viumi/viumi_client_credentials_model.dart';
+import 'package:multipay/src/models/viumi/viumi_access_token_model.dart';
+import 'package:multipay/src/models/viumi/viumi_client_credentials_model.dart';
 
 class ViumiCheckoutManager {
   static final ViumiCheckoutManager _instance = ViumiCheckoutManager._();

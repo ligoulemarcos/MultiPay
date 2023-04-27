@@ -1,4 +1,4 @@
-import 'package:multipay/src/viumi/viumi_access_token_model.dart';
+import 'package:multipay/src/models/viumi/viumi_access_token_model.dart';
 
 class ViumiClientCredentialsModel {
   String? grantType;
