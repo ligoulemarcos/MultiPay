@@ -20,7 +20,7 @@ class UalaBisClientCredentialsModel {
       userName: json["user_name"],
       clientId: json["client_id"],
       clientSecret: json["client_secret_id"],
-      grantType: json["grant_type"] ?? "*",
+      grantType: json["grant_type"],
     );
   }
 
