@@ -13,17 +13,17 @@ class ViumiAccessTokenModel {
 
   factory ViumiAccessTokenModel.fromJson(Map<String, dynamic> json) {
     return ViumiAccessTokenModel(
-      tokenType: json["grant_type"],
-      expiresIn: int.tryParse(json["client_id"]),
-      accessToken: json["client_secret"],
-      refreshToken: json["scope"] ?? "*",
+      tokenType: json["token_type"],
+      expiresIn: int.tryParse(json["expires_in"]),
+      accessToken: json["access_token"],
+      refreshToken: json["refresh_token"] ?? "*",
     );
   }
 
   Map<String, dynamic> toJson() => {
-        "grant_type": tokenType,
-        "client_id": expiresIn,
-        "client_secret": accessToken,
-        "scope": refreshToken,
+        "token_type": tokenType,
+        "expires_in": expiresIn,
+        "access_token": accessToken,
+        "refresh_token": refreshToken,
       };
 }
