@@ -1,6 +1,8 @@
 import "dart:convert";
 
 import "package:http/http.dart" as http;
+import "package:multipay/src/models/ualabis/ualabis_access_token.dart";
+import "package:multipay/src/models/ualabis/ualabis_client_credentials.dart";
 
 class UalaBisManager {
   static final UalaBisManager _instance = UalaBisManager._();
@@ -12,16 +14,19 @@ class UalaBisManager {
 
   UalaBisManager._();
 
-  Future<Map<String, dynamic>> postRequestAccessToken(
-      Map<String, dynamic> client) async {
+  Future<UalaBisClientCredentialsModel> postRequestAccessToken(
+      UalaBisClientCredentialsModel client) async {
     var response = await http.post(
       Uri.https(
         "auth.prod.ua.la",
         "/1/auth/token",
       ),
-      body: client,
+      body: client.toJson(),
     );
 
-    return json.decode(response.body);
+    client.accessToken =
+        UalaBisAccessTokenModel.fromJson(json.decode(response.body));
+
+    return client;
   }
 }

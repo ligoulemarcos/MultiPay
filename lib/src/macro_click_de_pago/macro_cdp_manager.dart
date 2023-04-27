@@ -64,19 +64,22 @@ class MacroCDPManager {
       return null;
     }
 
-    var response =
-        await http.post(Uri.https(_getBaseURL(), "tokens"), headers: {
-      "Authorization": "Bearer ${client.token!.accessToken!}",
-      "Content-Type": "application/json",
-    }, body: {
-      "Comercio": client.guid,
-      "SucursalComercio": branchOfficeClient,
-      "Productos": products != null && products.isNotEmpty
-          ? List<String>.from(products.map((x) => x))
-          : null,
-      "TransacicionComercioId": commerceTransactionId,
-      "Ip": ip,
-    });
+    var response = await http.post(
+      Uri.https(_getBaseURL(), "tokens"),
+      headers: {
+        "Authorization": "Bearer ${client.token!.accessToken!}",
+        "Content-Type": "application/json",
+      },
+      body: {
+        "Comercio": client.guid,
+        "SucursalComercio": branchOfficeClient,
+        "Productos": products != null && products.isNotEmpty
+            ? List<String>.from(products.map((x) => x))
+            : null,
+        "TransacicionComercioId": commerceTransactionId,
+        "Ip": ip,
+      },
+    );
 
     return json.decode(response.body);
   }
