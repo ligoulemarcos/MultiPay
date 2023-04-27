@@ -1,14 +1,18 @@
+import 'package:multipay/src/viumi/viumi_access_token_model.dart';
+
 class ViumiClientCredentialsModel {
   String? grantType;
   String? clientId;
   String? clientSecret;
   String? scope = "*";
+  ViumiAccessTokenModel? accessToken;
 
   ViumiClientCredentialsModel({
     this.grantType,
     this.clientId,
     this.clientSecret,
     this.scope,
+    this.accessToken,
   });
 
   factory ViumiClientCredentialsModel.fromJson(Map<String, dynamic> json) {

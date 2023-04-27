@@ -6,14 +6,22 @@ import 'package:multipay/src/macro_click_de_pago/macro_access_token.dart';
 import 'macro_client_credentials.dart';
 
 class MacroCDPManager {
-  Future<bool> checkAvailability({
-    sandboxEnvironment = true,
-  }) async {
+  static final MacroCDPManager _instance = MacroCDPManager._();
+  bool sandboxEnvironment = true;
+
+  factory MacroCDPManager() {
+    return _instance;
+  }
+
+  MacroCDPManager._();
+
+  setSandboxEnvironment(bool set) => sandboxEnvironment = set;
+
+  Future<bool> checkAvailability(
+  ) async {
     var response = await http.get(
       Uri.https(
-        _getBaseURL(
-          sandboxEnvironment,
-        ),
+        _getBaseURL(),
         "health",
       ),
     );
@@ -22,18 +30,15 @@ class MacroCDPManager {
   }
 
   Future<MacroClientCredentialsModel?> getAccessToken({
-    sandboxEnvironment = true,
     required MacroClientCredentialsModel client,
   }) async {
-    if (!(await checkAvailability(
-      sandboxEnvironment: sandboxEnvironment,
-    ))) {
+    if (!(await checkAvailability())) {
       return null;
     }
 
     var response = await http.post(
       Uri.https(
-        _getBaseURL(sandboxEnvironment),
+        _getBaseURL(),
         "sesion",
       ),
       body: client.toJson(),
@@ -49,7 +54,6 @@ class MacroCDPManager {
   }
 
   Future<Map<String, dynamic>?> getPaymentToken({
-    sandboxEnvironment = true,
     String? branchOfficeClient,
     List<String>? products,
     double? totalPrice,
@@ -57,8 +61,12 @@ class MacroCDPManager {
     String? ip, //??????????????????????????????????????
     required MacroClientCredentialsModel client,
   }) async {
+    if (!(await checkAvailability())) {
+      return null;
+    }
+
     var response = await http
-        .post(Uri.https(_getBaseURL(sandboxEnvironment), "tokens"), headers: {
+        .post(Uri.https(_getBaseURL(), "tokens"), headers: {
       "Authorization": "Bearer ${client.token!.accessToken!}",
       "Content-Type": "application/json",
     }, body: {
@@ -74,7 +82,7 @@ class MacroCDPManager {
     return json.decode(response.body);
   }
 
-  _getBaseURL(bool isSandbox) => isSandbox
+  _getBaseURL() => sandboxEnvironment
       ? "https://sandboxpp.asjservicios.com.ar:8082/v1/"
       : "https://botonpp.asjservicios.com.ar:8082/v1/";
 }
