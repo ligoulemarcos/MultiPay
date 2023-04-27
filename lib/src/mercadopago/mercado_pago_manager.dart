@@ -11,6 +11,7 @@ class MercadoPagoManager {
   }
 
   MercadoPagoManager._();
+
   ///Starts the checkout.
   ///
   ///Returns a PaymentResult with the information, or the error code.
@@ -22,8 +23,16 @@ class MercadoPagoManager {
   ///Can be personalized in several aspects.
   ///See <https://www.mercadopago.com.ar/developers/es/guides/payments/mobile-checkout/personalization/>
   /// for more details.
-  Future<PaymentResult> startCheckout(String publicKey, String preferenceId, MethodChannel channel) async {
-    Map<String, dynamic>? result = await (channel.invokeMapMethod<String, dynamic>("startCheckout", {"publicKey": publicKey, "preferenceId": preferenceId,},));
+  Future<PaymentResult> startCheckout(
+      String publicKey, String preferenceId, MethodChannel channel) async {
+    Map<String, dynamic>? result =
+        await (channel.invokeMapMethod<String, dynamic>(
+      "startCheckout",
+      {
+        "publicKey": publicKey,
+        "preferenceId": preferenceId,
+      },
+    ));
 
     return PaymentResult.fromJson(result!);
   }
