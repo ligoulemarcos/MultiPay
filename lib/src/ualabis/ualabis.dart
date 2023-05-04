@@ -29,4 +29,33 @@ class UalaBisManager {
 
     return client;
   }
+
+  Future<Map<String, dynamic>?> postUalaBisCheckout({
+    required UalaBisClientCredentialsModel client,
+    required String totalPrice,
+    required String description,
+    required String callbackSuccess,
+    required String callbackFail,
+    String? notificationURL,
+  }) async {
+    var response = await http.post(
+      Uri.https(
+        "checkout.prod.ua.la",
+        "/1/checkout",
+      ),
+      headers: {
+        "Authorization": "Bearer ${client.accessToken!.accessToken!}",
+      },
+      body: {
+        "amount": totalPrice,
+        "description": description,
+        "userName": client.userName,
+        "callback_fail": callbackFail,
+        "callback_success": callbackSuccess,
+        "notification_url": notificationURL,
+      },
+    );
+
+    return json.decode(response.body);
+  }
 }
