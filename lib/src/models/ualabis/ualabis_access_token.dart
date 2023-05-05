@@ -13,7 +13,7 @@ class UalaBisAccessTokenModel {
     return UalaBisAccessTokenModel(
       accessToken: json["access_token"],
       tokenType: json["token_type"],
-      expiresIn: int.tryParse(json["expires_in"]),
+      expiresIn: json["expires_in"],
     );
   }
 
