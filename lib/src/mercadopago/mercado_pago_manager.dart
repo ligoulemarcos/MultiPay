@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:convert';
 
+import "package:http/http.dart" as http;
 import 'package:flutter/services.dart';
 import 'package:multipay/src/mercadopago/payment_result.dart';
 
@@ -35,5 +37,49 @@ class MercadoPagoManager {
     ));
 
     return PaymentResult.fromJson(result!);
+  }
+
+  //DUMMY: esto lo hace backend
+  Future<Map<String, dynamic>?> getPurchasePreferenceId() async {
+    var response = await http.post(
+      Uri.https(
+        "api.mercadopago.com",
+        "checkout/preferences",
+      ),
+      headers: {
+        "Content-Type": "application/json; charset=utf-8",
+        "Authorization":
+            "Bearer TEST-4940267580865040-050416-ee66edefec3398284207ab68d01f399c-697699240",
+      },
+      body: jsonEncode({
+        "items": [
+          {
+            "title": "Choripan en polvo",
+            "description": "Un choripan, en polvo",
+            "picture_url":
+                "https://www.laylita.com/recetas/wp-content/uploads/Receta-del-choripan.jpg",
+            "category_id": "food",
+            "quantity": 1,
+            "currency_id": "ARS",
+            "unit_price": 50
+          }
+        ],
+        "payer": {"phone": {}, "identification": {}, "address": {}},
+        "payment_methods": {
+          "excluded_payment_methods": [{}],
+          "excluded_payment_types": [{}]
+        },
+        "shipments": {
+          "free_methods": [{}],
+          "receiver_address": {}
+        },
+        "back_urls": {},
+        "differential_pricing": {},
+        "tracks": [],
+        "metadata": {}
+      }),
+    );
+
+    return jsonDecode(response.body);
   }
 }
