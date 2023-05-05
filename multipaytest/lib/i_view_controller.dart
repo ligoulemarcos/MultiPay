@@ -1,0 +1,5 @@
+class IViewController {
+  initPage() {}
+  disposePage() {}
+
+}
